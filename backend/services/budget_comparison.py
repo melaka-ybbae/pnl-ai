@@ -112,7 +112,7 @@ class BudgetComparisonService:
 
         매출 = sum(
             item.월별금액.get(month_key, 0)
-            for item in budget_data.항목 if item.분류 == '매출'
+            for item in budget_data.항목 if item.분류 in ('매출', '매출액')
         )
         매출원가 = sum(
             item.월별금액.get(month_key, 0)

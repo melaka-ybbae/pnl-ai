@@ -1,0 +1,89 @@
+{
+  "accounts_receivable": [
+    {
+      "invoice_no": "INV-2024-1201",
+      "customer": "ABC Building Materials Inc.",
+      "country": "USA",
+      "invoice_date": "2024-12-01",
+      "due_date": "2025-01-30",
+      "amount_usd": 453000,
+      "exchange_rate_at_invoice": 1300,
+      "amount_krw": 588900000,
+      "status": "outstanding",
+      "days_outstanding": 59,
+      "days_overdue": 0,
+      "collection_status": "on_track"
+    },
+    {
+      "invoice_no": "INV-2024-1115",
+      "customer": "EuroSteel GmbH",
+      "country": "Germany",
+      "invoice_date": "2024-11-15",
+      "due_date": "2025-01-14",
+      "amount_eur": 280000,
+      "exchange_rate_at_invoice": 1420,
+      "amount_krw": 397600000,
+      "status": "overdue",
+      "days_outstanding": 75,
+      "days_overdue": 15,
+      "collection_status": "follow_up_needed"
+    },
+    {
+      "invoice_no": "INV-2024-1001",
+      "customer": "Vietnam Construction Co.",
+      "country": "Vietnam",
+      "invoice_date": "2024-10-01",
+      "due_date": "2024-11-30",
+      "amount_usd": 150000,
+      "exchange_rate_at_invoice": 1280,
+      "amount_krw": 192000000,
+      "status": "overdue",
+      "days_outstanding": 120,
+      "days_overdue": 60,
+      "collection_status": "at_risk"
+    },
+    {
+      "invoice_no": "INV-2025-0115",
+      "customer": "ABC Building Materials Inc.",
+      "country": "USA",
+      "invoice_date": "2025-01-15",
+      "due_date": "2025-03-16",
+      "amount_usd": 429000,
+      "exchange_rate_at_invoice": 1315,
+      "amount_krw": 564135000,
+      "status": "outstanding",
+      "days_outstanding": 14,
+      "days_overdue": 0,
+      "collection_status": "on_track"
+    },
+    {
+      "invoice_no": "INV-2025-0120",
+      "customer": "Tokyo Building Supply",
+      "country": "Japan",
+      "invoice_date": "2025-01-20",
+      "due_date": "2025-03-21",
+      "amount_usd": 265200,
+      "exchange_rate_at_invoice": 1318,
+      "amount_krw": 349533600,
+      "status": "outstanding",
+      "days_outstanding": 9,
+      "days_overdue": 0,
+      "collection_status": "on_track"
+    }
+  ],
+  "summary": {
+    "total_outstanding": 2092168600,
+    "current": 1502568600,
+    "overdue_1_30": 397600000,
+    "overdue_31_60": 0,
+    "overdue_61_90": 192000000,
+    "overdue_90_plus": 0
+  },
+  "aging_analysis": {
+    "current_pct": 71.8,
+    "overdue_1_30_pct": 19.0,
+    "overdue_31_60_pct": 0,
+    "overdue_61_90_pct": 9.2,
+    "overdue_90_plus_pct": 0
+  }
+}

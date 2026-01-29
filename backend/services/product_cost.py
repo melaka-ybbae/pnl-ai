@@ -26,10 +26,12 @@ class ProductCostAnalysisService:
     }
 
     # 직접원가 항목 (제품별 추적 가능)
-    DIRECT_COST_KEYWORDS = ['냉연강판', '도료', '아연', '생산직']
+    # 원재료비, 직접노무비 및 기존 상세 항목 포함
+    DIRECT_COST_KEYWORDS = ['원재료비', '직접노무비', '냉연강판', '도료', '아연', '생산직']
 
     # 간접원가 항목 (배부 필요)
-    INDIRECT_COST_KEYWORDS = ['전력비', '가스비', '감가상각비', '수선유지비', '외주가공비', '품질관리']
+    # 제조경비, 재고자산조정 및 기존 상세 항목 포함
+    INDIRECT_COST_KEYWORDS = ['제조경비', '재고자산조정', '전력비', '가스비', '감가상각비', '수선유지비', '외주가공비', '품질관리']
 
     def _extract_product_from_account(self, 계정과목: str) -> str:
         """계정과목에서 제품군 추출"""
@@ -48,7 +50,7 @@ class ProductCostAnalysisService:
         total_sales = 0
 
         for item in items:
-            if item.분류 == '매출':
+            if item.분류 in ('매출', '매출액'):
                 amount = item.금액.get(period, 0)
                 product = self._extract_product_from_account(item.계정과목)
                 sales_by_product[product] += amount
@@ -80,10 +82,13 @@ class ProductCostAnalysisService:
             amount = item.금액.get(period, 0)
             total_cost += amount
 
-            if any(kw in item.계정과목 for kw in ['냉연강판', '도료', '아연']):
+            # 원재료비 매칭 (계정과목에 '원재료' 포함 또는 기존 키워드)
+            if any(kw in item.계정과목 for kw in ['원재료', '냉연강판', '도료', '아연']):
                 cost_structure['원재료비'] += amount
-            elif any(kw in item.계정과목 for kw in ['생산직', '품질관리']):
+            # 노무비 매칭 (계정과목에 '노무' 포함 또는 기존 키워드)
+            elif any(kw in item.계정과목 for kw in ['노무비', '노무', '생산직', '품질관리']):
                 cost_structure['노무비'] += amount
+            # 나머지는 제조경비
             else:
                 cost_structure['제조경비'] += amount
 
@@ -122,7 +127,7 @@ class ProductCostAnalysisService:
             # 매출액
             매출액 = sum(
                 item.금액.get(period, 0) for item in data.items
-                if item.분류 == '매출' and self._extract_product_from_account(item.계정과목) == 제품
+                if item.분류 in ('매출', '매출액') and self._extract_product_from_account(item.계정과목) == 제품
             )
 
             # 원가 배부 (매출 비율 기반)
@@ -166,7 +171,7 @@ class ProductCostAnalysisService:
             # 매출
             매출액 = sum(
                 item.금액.get(period, 0) for item in data.items
-                if item.분류 == '매출' and self._extract_product_from_account(item.계정과목) == 제품
+                if item.분류 in ('매출', '매출액') and self._extract_product_from_account(item.계정과목) == 제품
             )
 
             # 변동비 (원재료비만 변동비로 가정)

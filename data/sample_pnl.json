@@ -1,0 +1,139 @@
+{
+  "company": "DK Dongshin",
+  "period": {
+    "current": "2025-01",
+    "previous": "2024-12"
+  },
+  "income_statement": {
+    "revenue": {
+      "current": 4500000000,
+      "previous": 4200000000,
+      "breakdown": {
+        "export_construction": {
+          "current": 2700000000,
+          "previous": 2500000000
+        },
+        "export_appliance": {
+          "current": 1350000000,
+          "previous": 1300000000
+        },
+        "domestic": {
+          "current": 450000000,
+          "previous": 400000000
+        }
+      }
+    },
+    "cost_of_goods_sold": {
+      "current": 3240000000,
+      "previous": 2940000000,
+      "breakdown": {
+        "raw_materials": {
+          "current": 2430000000,
+          "previous": 2205000000,
+          "detail": {
+            "cold_rolled_steel": {
+              "current": 2041200000,
+              "previous": 1890000000
+            },
+            "paint": {
+              "current": 291600000,
+              "previous": 236250000
+            },
+            "zinc": {
+              "current": 97200000,
+              "previous": 78750000
+            }
+          }
+        },
+        "labor": {
+          "current": 486000000,
+          "previous": 441000000
+        },
+        "manufacturing_overhead": {
+          "current": 324000000,
+          "previous": 294000000,
+          "detail": {
+            "electricity": {
+              "current": 162000000,
+              "previous": 147000000
+            },
+            "gas": {
+              "current": 97200000,
+              "previous": 88200000
+            },
+            "depreciation": {
+              "current": 64800000,
+              "previous": 58800000
+            }
+          }
+        }
+      }
+    },
+    "gross_profit": {
+      "current": 1260000000,
+      "previous": 1260000000
+    },
+    "selling_admin_expenses": {
+      "current": 630000000,
+      "previous": 588000000,
+      "breakdown": {
+        "salaries": {
+          "current": 315000000,
+          "previous": 294000000
+        },
+        "logistics": {
+          "current": 189000000,
+          "previous": 176400000
+        },
+        "marketing": {
+          "current": 63000000,
+          "previous": 58800000
+        },
+        "other": {
+          "current": 63000000,
+          "previous": 58800000
+        }
+      }
+    },
+    "operating_profit": {
+      "current": 630000000,
+      "previous": 672000000
+    },
+    "non_operating": {
+      "interest_income": {
+        "current": 9000000,
+        "previous": 8400000
+      },
+      "interest_expense": {
+        "current": 45000000,
+        "previous": 42000000
+      },
+      "forex_gain_loss": {
+        "current": -36000000,
+        "previous": 21000000
+      }
+    },
+    "net_profit": {
+      "current": 558000000,
+      "previous": 659400000
+    }
+  },
+  "ratios": {
+    "cost_rate": {
+      "current": 72.0,
+      "previous": 70.0
+    },
+    "gross_margin": {
+      "current": 28.0,
+      "previous": 30.0
+    },
+    "operating_margin": {
+      "current": 14.0,
+      "previous": 16.0
+    },
+    "net_margin": {
+      "current": 12.4,
+      "previous": 15.7
+    }
+  }
+}

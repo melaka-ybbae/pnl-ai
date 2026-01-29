@@ -2,9 +2,9 @@ import { useState } from 'react';
 import Card from '../components/common/Card';
 import { MarkdownRenderer } from '../components/common/MarkdownRenderer';
 import {
-  Brain, TrendingUp, TrendingDown, AlertTriangle, ExternalLink,
-  DollarSign, Fuel, Zap, BarChart3, ArrowRight, RefreshCw,
-  ChevronDown, ChevronUp, Link2, Calendar, Search
+  Brain, ExternalLink,
+  DollarSign, Fuel, Zap, BarChart3, RefreshCw,
+  Link2, Calendar, Search
 } from 'lucide-react';
 
 interface CauseItem {

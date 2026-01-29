@@ -140,6 +140,41 @@ async def list_budgets(
         })
 
 
+@router.post("/comparison/ai-comment")
+async def get_budget_ai_comment(
+    year: int = Query(..., description="연도"),
+    month: int = Query(..., description="월"),
+    version: str = Query("기본", description="예산 버전")
+):
+    """
+    예산 대비 실적 AI 코멘트만 별도로 가져오기
+    """
+    try:
+        actual_data = get_current_data()
+
+        result = budget_comparison_service.compare(
+            actual_data, year, month, version
+        )
+
+        ai_comment = await ai_analysis_service.generate_budget_comment(result)
+
+        return JSONResponse({
+            "success": True,
+            "data": {"ai_comment": ai_comment}
+        })
+
+    except ValueError as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
 @router.post("/comparison", response_model=AnalysisResponse)
 async def compare_budget(
     year: int = Query(..., description="연도"),

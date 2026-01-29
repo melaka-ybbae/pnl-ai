@@ -2,7 +2,10 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 from datetime import date
-from .enums import 분류Type, 제품군, ReportType, ExportFormat
+from .enums import (
+    분류Type, 제품군, ReportType, ExportFormat,
+    DocumentType, DocumentStatus, PaymentStatus, CurrencyType
+)
 
 
 # ============ 기본 데이터 스키마 ============
@@ -192,3 +195,131 @@ class ERPConnectionTest(BaseModel):
     success: bool
     message: str
     erp_version: Optional[str] = None
+
+
+# ============ 무역 관련 스키마 ============
+
+class InvoiceItem(BaseModel):
+    """Commercial Invoice 품목"""
+    product: str  # 제품명
+    quantity: float  # 수량
+    unit: str  # 단위 (MT, KG, PCS 등)
+    unit_price: float  # 단가
+    amount: float  # 금액
+    hs_code: Optional[str] = None  # HS Code
+
+
+class Invoice(BaseModel):
+    """Commercial Invoice (송장)"""
+    invoice_no: str  # 송장번호
+    date: date  # 발행일
+    customer: str  # 고객사명
+    country: str  # 국가
+    currency: CurrencyType  # 통화
+    items: List[InvoiceItem]  # 품목 리스트
+    total: float  # 총 금액
+    payment_terms: str  # 결제 조건 (T/T, L/C 등)
+    status: PaymentStatus = PaymentStatus.PENDING
+    incoterms: Optional[str] = None  # FOB, CIF, CFR 등
+    remarks: Optional[str] = None
+
+
+class BillOfLading(BaseModel):
+    """Bill of Lading (선하증권)"""
+    bl_no: str  # B/L 번호
+    invoice_ref: str  # 관련 송장번호
+    shipper: str  # 송하인
+    consignee: str  # 수하인
+    vessel: str  # 선박명
+    port_of_loading: str  # 선적항
+    port_of_discharge: str  # 양하항
+    ship_date: date  # 선적일
+    quantity: float  # 수량
+    unit: str  # 단위
+    weight: Optional[float] = None  # 중량 (KG)
+    container_no: Optional[str] = None  # 컨테이너 번호
+
+
+class AccountReceivable(BaseModel):
+    """매출채권 (수출대금 미수금)"""
+    invoice_no: str  # 송장번호
+    customer: str  # 고객사
+    invoice_date: date  # 송장일자
+    due_date: date  # 만기일
+    amount_usd: float  # USD 금액
+    amount_krw: Optional[float] = None  # KRW 환산금액
+    exchange_rate: Optional[float] = None  # 적용환율
+    paid: bool = False  # 회수 여부
+    paid_date: Optional[date] = None  # 회수일
+    days_overdue: int = 0  # 연체일수
+    status: PaymentStatus = PaymentStatus.PENDING
+
+
+class AccountPayable(BaseModel):
+    """매입채무 (수입대금 미지급금)"""
+    invoice_no: str  # 송장번호
+    supplier: str  # 공급업체
+    invoice_date: date  # 송장일자
+    due_date: date  # 지급기한
+    amount_usd: float  # USD 금액
+    amount_krw: Optional[float] = None  # KRW 환산금액
+    exchange_rate: Optional[float] = None  # 적용환율
+    paid: bool = False  # 지급 여부
+    paid_date: Optional[date] = None  # 지급일
+    days_overdue: int = 0  # 연체일수
+    status: PaymentStatus = PaymentStatus.PENDING
+
+
+class ExchangeRate(BaseModel):
+    """환율 정보"""
+    currency: CurrencyType  # 통화
+    rate: float  # 환율 (대 KRW)
+    date: date  # 적용일자
+    source: Optional[str] = "한국은행"  # 출처
+
+
+class TradeDocument(BaseModel):
+    """무역 서류 관리"""
+    id: Optional[int] = None
+    doc_type: DocumentType  # 서류 유형
+    file_path: str  # 파일 경로
+    upload_date: date  # 업로드 일자
+    parsed_data: Optional[Dict[str, Any]] = None  # 파싱된 데이터 (JSON)
+    status: DocumentStatus = DocumentStatus.UPLOADED
+    reference_no: Optional[str] = None  # 참조번호 (송장번호, B/L번호 등)
+    notes: Optional[str] = None
+
+
+class ARAgingReport(BaseModel):
+    """매출채권 연령분석 보고서"""
+    기준일: date
+    총매출채권: float
+    당월: float  # 0-30일
+    일개월: float  # 31-60일
+    이개월: float  # 61-90일
+    삼개월이상: float  # 90일 이상
+    고객별_분석: List[Dict[str, Any]]  # 고객별 상세
+
+
+class APAgingReport(BaseModel):
+    """매입채무 연령분석 보고서"""
+    기준일: date
+    총매입채무: float
+    당월: float  # 0-30일
+    일개월: float  # 31-60일
+    이개월: float  # 61-90일
+    삼개월이상: float  # 90일 이상
+    공급업체별_분석: List[Dict[str, Any]]  # 공급업체별 상세
+
+
+class TradeStatistics(BaseModel):
+    """무역 통계"""
+    기간: str  # "2025년 1월"
+    총수출액_USD: float
+    총수출액_KRW: float
+    총수입액_USD: float
+    총수입액_KRW: float
+    무역수지: float  # 수출-수입
+    평균환율: float
+    주요수출국: List[Dict[str, float]]  # [{"국가": "미국", "금액": 1000000}]
+    주요수입국: List[Dict[str, float]]

@@ -1,0 +1,214 @@
+[
+  {
+    "invoice_no": "INV-2025-0115",
+    "date": "2025-01-15",
+    "seller": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea",
+      "tel": "+82-51-XXX-XXXX"
+    },
+    "buyer": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA",
+      "country": "USA"
+    },
+    "currency": "USD",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 9002",
+        "specification": "0.5mm x 1,219mm",
+        "quantity": 300,
+        "unit": "TON",
+        "unit_price": 850.00,
+        "amount": 255000.00
+      },
+      {
+        "item_no": 2,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 5015",
+        "specification": "0.45mm x 1,219mm",
+        "quantity": 200,
+        "unit": "TON",
+        "unit_price": 870.00,
+        "amount": 174000.00
+      }
+    ],
+    "subtotal": 429000.00,
+    "freight": 0,
+    "insurance": 0,
+    "total": 429000.00,
+    "payment_terms": "T/T 60 days after B/L date",
+    "incoterms": "FOB Busan",
+    "bank_info": {
+      "bank": "Hana Bank",
+      "account": "XXX-XXXXXX-XXX",
+      "swift": "HNBNKRSE"
+    }
+  },
+  {
+    "invoice_no": "INV-2024-1201",
+    "date": "2024-12-01",
+    "seller": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea",
+      "tel": "+82-51-XXX-XXXX"
+    },
+    "buyer": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA",
+      "country": "USA"
+    },
+    "currency": "USD",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 3000",
+        "specification": "0.5mm x 1,250mm",
+        "quantity": 350,
+        "unit": "TON",
+        "unit_price": 900.00,
+        "amount": 315000.00
+      },
+      {
+        "item_no": 2,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 6005",
+        "specification": "0.4mm x 1,219mm",
+        "quantity": 150,
+        "unit": "TON",
+        "unit_price": 920.00,
+        "amount": 138000.00
+      }
+    ],
+    "subtotal": 453000.00,
+    "freight": 0,
+    "insurance": 0,
+    "total": 453000.00,
+    "payment_terms": "T/T 60 days after B/L date",
+    "incoterms": "FOB Busan",
+    "bank_info": {
+      "bank": "Hana Bank",
+      "account": "XXX-XXXXXX-XXX",
+      "swift": "HNBNKRSE"
+    }
+  },
+  {
+    "invoice_no": "INV-2024-1115",
+    "date": "2024-11-15",
+    "seller": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea",
+      "tel": "+82-51-XXX-XXXX"
+    },
+    "buyer": {
+      "name": "EuroSteel GmbH",
+      "address": "Industriestrasse 45, Hamburg, Germany",
+      "country": "Germany"
+    },
+    "currency": "EUR",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 7016",
+        "specification": "0.5mm x 1,250mm",
+        "quantity": 400,
+        "unit": "TON",
+        "unit_price": 700.00,
+        "amount": 280000.00
+      }
+    ],
+    "subtotal": 280000.00,
+    "freight": 0,
+    "insurance": 0,
+    "total": 280000.00,
+    "payment_terms": "T/T 60 days after B/L date",
+    "incoterms": "FOB Busan",
+    "bank_info": {
+      "bank": "Hana Bank",
+      "account": "XXX-XXXXXX-XXX",
+      "swift": "HNBNKRSE"
+    }
+  },
+  {
+    "invoice_no": "INV-2024-1001",
+    "date": "2024-10-01",
+    "seller": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea",
+      "tel": "+82-51-XXX-XXXX"
+    },
+    "buyer": {
+      "name": "Vietnam Construction Co.",
+      "address": "567 Le Loi St, Ho Chi Minh, Vietnam",
+      "country": "Vietnam"
+    },
+    "currency": "USD",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 9002",
+        "specification": "0.45mm x 1,000mm",
+        "quantity": 250,
+        "unit": "TON",
+        "unit_price": 600.00,
+        "amount": 150000.00
+      }
+    ],
+    "subtotal": 150000.00,
+    "freight": 0,
+    "insurance": 0,
+    "total": 150000.00,
+    "payment_terms": "T/T 60 days after B/L date",
+    "incoterms": "FOB Busan",
+    "bank_info": {
+      "bank": "Hana Bank",
+      "account": "XXX-XXXXXX-XXX",
+      "swift": "HNBNKRSE"
+    }
+  },
+  {
+    "invoice_no": "INV-2025-0120",
+    "date": "2025-01-20",
+    "seller": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea",
+      "tel": "+82-51-XXX-XXXX"
+    },
+    "buyer": {
+      "name": "Tokyo Building Supply",
+      "address": "12-3 Shibuya, Tokyo, Japan",
+      "country": "Japan"
+    },
+    "currency": "USD",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 5012",
+        "specification": "0.5mm x 1,219mm",
+        "quantity": 180,
+        "unit": "TON",
+        "unit_price": 880.00,
+        "amount": 158400.00
+      },
+      {
+        "item_no": 2,
+        "product": "Pre-painted Color Steel Coil (PCM) - RAL 8017",
+        "specification": "0.45mm x 1,219mm",
+        "quantity": 120,
+        "unit": "TON",
+        "unit_price": 890.00,
+        "amount": 106800.00
+      }
+    ],
+    "subtotal": 265200.00,
+    "freight": 0,
+    "insurance": 0,
+    "total": 265200.00,
+    "payment_terms": "T/T 60 days after B/L date",
+    "incoterms": "FOB Busan",
+    "bank_info": {
+      "bank": "Hana Bank",
+      "account": "XXX-XXXXXX-XXX",
+      "swift": "HNBNKRSE"
+    }
+  }
+]

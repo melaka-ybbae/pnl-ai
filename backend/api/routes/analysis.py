@@ -29,10 +29,22 @@ async def analyze_monthly(
     try:
         data = get_current_data()
 
+        # 1개 기간만 있는 경우 단일 기간 분석
+        if len(data.periods) == 1:
+            single_period = data.periods[0]
+            single_result = monthly_analysis_service.analyze_single_period(data, single_period)
+
+            if include_ai:
+                try:
+                    ai_comment = await ai_analysis_service.generate_single_period_comment(single_result)
+                    single_result['ai_comment'] = ai_comment
+                except Exception as e:
+                    single_result['ai_comment'] = f"AI 분석 생성 실패: {str(e)}"
+
+            return AnalysisResponse(success=True, data=single_result)
+
         # 기간 자동 설정
         if not 기준월 or not 비교월:
-            if len(data.periods) < 2:
-                raise HTTPException(status_code=400, detail="최소 2개 기간의 데이터가 필요합니다.")
             기준월 = data.periods[-2]
             비교월 = data.periods[-1]
 
@@ -102,6 +114,82 @@ async def analyze_product_cost(
         raise
     except Exception as e:
         return AnalysisResponse(success=False, error=str(e))
+
+
+@router.post("/monthly/ai-comment")
+async def get_monthly_ai_comment(
+    기준월: Optional[str] = Query(None, description="비교 기준월"),
+    비교월: Optional[str] = Query(None, description="비교 대상월")
+):
+    """
+    월간 분석 AI 코멘트만 별도로 가져오기
+    """
+    try:
+        data = get_current_data()
+
+        if not 기준월 or not 비교월:
+            if len(data.periods) < 2:
+                raise HTTPException(status_code=400, detail="최소 2개 기간의 데이터가 필요합니다.")
+            기준월 = data.periods[-2]
+            비교월 = data.periods[-1]
+
+        if 기준월 not in data.periods or 비교월 not in data.periods:
+            raise HTTPException(
+                status_code=400,
+                detail=f"유효하지 않은 기간입니다. 사용 가능: {data.periods}"
+            )
+
+        result = monthly_analysis_service.compare_periods(data, 기준월, 비교월)
+        ai_comment = await ai_analysis_service.generate_monthly_comment(result)
+
+        return JSONResponse({
+            "success": True,
+            "data": {"ai_comment": ai_comment}
+        })
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@router.post("/product-cost/ai-comment")
+async def get_product_cost_ai_comment(
+    기간: Optional[str] = Query(None, description="분석 기간")
+):
+    """
+    제품별 원가 분석 AI 코멘트만 별도로 가져오기
+    """
+    try:
+        data = get_current_data()
+
+        if not 기간:
+            기간 = data.periods[-1]
+
+        if 기간 not in data.periods:
+            raise HTTPException(
+                status_code=400,
+                detail=f"유효하지 않은 기간입니다. 사용 가능: {data.periods}"
+            )
+
+        result = product_cost_service.analyze(data, 기간)
+        ai_comment = await ai_analysis_service.generate_product_cost_comment(result)
+
+        return JSONResponse({
+            "success": True,
+            "data": {"ai_comment": ai_comment}
+        })
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
 
 
 @router.get("/trend")

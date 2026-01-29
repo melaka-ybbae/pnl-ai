@@ -1,0 +1,68 @@
+{
+  "simulation_type": "raw_material_price_change",
+  "input": {
+    "item": "cold_rolled_steel",
+    "change_rate": 10.0
+  },
+  "baseline": {
+    "monthly_revenue": 4500000000,
+    "monthly_cogs": 3240000000,
+    "cost_rate": 72.0,
+    "gross_margin": 28.0,
+    "operating_profit": 630000000,
+    "operating_margin": 14.0
+  },
+  "simulated": {
+    "monthly_revenue": 4500000000,
+    "monthly_cogs": 3444120000,
+    "cost_rate": 76.5,
+    "gross_margin": 23.5,
+    "operating_profit": 425880000,
+    "operating_margin": 9.5
+  },
+  "impact": {
+    "cogs_increase": 204120000,
+    "cost_rate_change": 4.5,
+    "gross_margin_change": -4.5,
+    "operating_profit_decrease": 204120000,
+    "operating_margin_change": -4.5
+  },
+  "recommendation": {
+    "price_increase_needed": 4.5,
+    "alternative_actions": [
+      "제품 단가 4.5% 인상으로 마진 회복",
+      "대체 원자재 검토 (중국산 냉연강판)",
+      "제조 효율화로 노무비/경비 절감"
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "가격 인상 시나리오",
+      "price_increase": 4.5,
+      "revenue": 4702500000,
+      "cogs": 3444120000,
+      "gross_margin": 26.8,
+      "operating_profit": 628380000,
+      "operating_margin": 13.4
+    },
+    {
+      "name": "원가절감 시나리오",
+      "cost_reduction": 3.0,
+      "revenue": 4500000000,
+      "cogs": 3340996800,
+      "gross_margin": 25.8,
+      "operating_profit": 528996800,
+      "operating_margin": 11.8
+    },
+    {
+      "name": "혼합 시나리오",
+      "price_increase": 2.5,
+      "cost_reduction": 1.5,
+      "revenue": 4612500000,
+      "cogs": 3392558200,
+      "gross_margin": 26.4,
+      "operating_profit": 589941800,
+      "operating_margin": 12.8
+    }
+  ]
+}

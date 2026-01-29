@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import { useAnalysisStore } from '../stores/analysisStore';
-import { uploadBudget, compareBudget } from '../services/api';
+import { uploadBudget, compareBudget, getBudgetAiComment } from '../services/api';
 import Card from '../components/common/Card';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { MarkdownRenderer } from '../components/common/MarkdownRenderer';
-import { FileUp, Upload, TrendingUp, TrendingDown, CheckCircle, AlertCircle } from 'lucide-react';
+import { FileUp, Upload, TrendingUp, TrendingDown, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
 import type { BudgetComparisonResult } from '../types';
 
 export default function Budget() {
@@ -12,6 +12,8 @@ export default function Budget() {
   const [year, setYear] = useState(2025);
   const [month, setMonth] = useState(2);
   const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiComment, setAiComment] = useState<string | null>(null);
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [uploadMessage, setUploadMessage] = useState('');
   const [comparison, setComparison] = useState<BudgetComparisonResult | null>(null);
@@ -40,15 +42,34 @@ export default function Budget() {
     if (!data) return;
 
     setLoading(true);
+    setAiComment(null);
     try {
-      const res = await compareBudget(year, month);
+      // AI 없이 데이터만 먼저 로드
+      const res = await compareBudget(year, month, '기본', false);
       if (res.success && res.data) {
         setComparison(res.data);
+        // 데이터 로드 후 AI 코멘트 별도 요청
+        loadAiComment();
       }
     } catch (error) {
       console.error('Comparison error:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadAiComment = async () => {
+    setAiLoading(true);
+    try {
+      const res = await getBudgetAiComment(year, month);
+      if (res.success && res.data) {
+        setAiComment(res.data.ai_comment);
+      }
+    } catch (error) {
+      console.error('AI comment error:', error);
+      setAiComment('AI 분석을 불러오는데 실패했습니다.');
+    } finally {
+      setAiLoading(false);
     }
   };
 
@@ -239,11 +260,18 @@ export default function Budget() {
           </Card>
 
           {/* AI Comment */}
-          {comparison.ai_comment && (
-            <Card title="AI 분석">
-              <MarkdownRenderer content={comparison.ai_comment} />
-            </Card>
-          )}
+          <Card title="AI 분석">
+            {aiLoading ? (
+              <div className="flex items-center gap-3 py-8 justify-center text-gray-500">
+                <Sparkles className="animate-pulse text-blue-500" size={24} />
+                <span>AI가 분석 중입니다...</span>
+              </div>
+            ) : aiComment ? (
+              <MarkdownRenderer content={aiComment} />
+            ) : (
+              <div className="text-gray-400 py-4 text-center">AI 분석 결과가 없습니다.</div>
+            )}
+          </Card>
         </div>
       )}
     </div>

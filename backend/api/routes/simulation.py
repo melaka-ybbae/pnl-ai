@@ -60,6 +60,43 @@ async def simulate_cost(
         return AnalysisResponse(success=False, error=str(e))
 
 
+@router.post("/cost/ai-comment")
+async def get_simulation_ai_comment(
+    input_data: CostSimulationInput,
+    기간: Optional[str] = Query(None, description="시뮬레이션 기준 기간")
+):
+    """
+    시뮬레이션 AI 코멘트만 별도로 가져오기
+    """
+    try:
+        data = get_current_data()
+
+        if not 기간:
+            기간 = data.periods[-1]
+
+        if 기간 not in data.periods:
+            raise HTTPException(
+                status_code=400,
+                detail=f"유효하지 않은 기간입니다. 사용 가능: {data.periods}"
+            )
+
+        result = cost_simulation_service.simulate(data, 기간, input_data)
+        ai_comment = await ai_analysis_service.generate_simulation_comment(result)
+
+        return JSONResponse({
+            "success": True,
+            "data": {"ai_comment": ai_comment}
+        })
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
 @router.get("/sensitivity", response_model=AnalysisResponse)
 async def sensitivity_analysis(
     기간: Optional[str] = Query(None, description="분석 기준 기간")
@@ -165,6 +202,166 @@ async def breakeven_analysis(
                 "기간": 기간,
                 "breakeven": result
             }
+        })
+
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@router.get("/breakeven")
+async def get_breakeven_point(기간: Optional[str] = Query(None, description="분석 기준 기간")):
+    """
+    현재 손익분기점 조회
+
+    - 현재 원가 구조 기준
+    - 고정비, 변동비 분석
+    - BEP 매출액 계산
+    """
+    try:
+        data = get_current_data()
+
+        if not 기간:
+            기간 = data.periods[-1]
+
+        # 샘플 손익분기점 데이터
+        breakeven_data = {
+            "period": 기간,
+            "fixed_costs": 350000000,  # 고정비
+            "variable_cost_ratio": 0.725,  # 변동비율
+            "contribution_margin_ratio": 0.275,  # 공헌이익률
+            "breakeven_sales": 1272727273,  # 손익분기 매출액
+            "current_sales": 2850000000,
+            "safety_margin": 1577272727,  # 안전한계
+            "safety_margin_ratio": 55.3,  # 안전한계율
+            "operating_leverage": 1.81  # 영업레버리지
+        }
+
+        return JSONResponse({
+            "success": True,
+            "data": breakeven_data
+        })
+
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@router.post("/price")
+async def simulate_price_change(
+    price_change_percent: float = Query(..., description="판매가 변동률 (%)"),
+    기간: Optional[str] = Query(None, description="시뮬레이션 기준 기간")
+):
+    """
+    단가 시뮬레이션
+
+    - 판매가 변동에 따른 이익 영향 분석
+    - 수량 변화 가정 가능
+    """
+    try:
+        data = get_current_data()
+
+        if not 기간:
+            기간 = data.periods[-1]
+
+        # 샘플 계산
+        current_sales = 2850000000
+        current_profit = 285000000
+        current_volume = 3000  # 톤
+
+        # 가격 변동 적용
+        new_price_per_unit = (current_sales / current_volume) * (1 + price_change_percent / 100)
+        new_sales = new_price_per_unit * current_volume
+
+        # 원가는 동일하다고 가정
+        cost_amount = current_sales - current_profit
+        new_profit = new_sales - cost_amount
+
+        result = {
+            "period": 기간,
+            "price_change_percent": price_change_percent,
+            "current": {
+                "sales": current_sales,
+                "profit": current_profit,
+                "volume": current_volume,
+                "price_per_unit": current_sales / current_volume
+            },
+            "simulated": {
+                "sales": new_sales,
+                "profit": new_profit,
+                "volume": current_volume,
+                "price_per_unit": new_price_per_unit
+            },
+            "impact": {
+                "sales_change": new_sales - current_sales,
+                "profit_change": new_profit - current_profit,
+                "profit_margin": (new_profit / new_sales * 100) if new_sales > 0 else 0
+            }
+        }
+
+        return JSONResponse({
+            "success": True,
+            "data": result
+        })
+
+    except Exception as e:
+        return JSONResponse({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@router.post("/forex")
+async def simulate_forex_change(
+    usd_rate: float = Query(..., description="시뮬레이션 USD 환율"),
+    기간: Optional[str] = Query(None, description="시뮬레이션 기준 기간")
+):
+    """
+    환율 시뮬레이션
+
+    - 환율 변동에 따른 매출/이익 영향
+    - 수출 비중 고려
+    """
+    try:
+        # 샘플 데이터
+        export_sales_usd = 1800000  # 수출 매출 (USD)
+        current_rate = 1450.0
+        current_sales_krw = export_sales_usd * current_rate
+
+        new_sales_krw = export_sales_usd * usd_rate
+        sales_diff = new_sales_krw - current_sales_krw
+
+        # 원가는 변동 없다고 가정 (단순화)
+        current_profit = current_sales_krw * 0.10  # 10% 이익률 가정
+        new_profit = current_profit + sales_diff  # 환율 변동만큼 이익 변동
+
+        result = {
+            "export_sales_usd": export_sales_usd,
+            "current_rate": current_rate,
+            "simulated_rate": usd_rate,
+            "rate_change_percent": ((usd_rate - current_rate) / current_rate) * 100,
+            "current": {
+                "sales_krw": current_sales_krw,
+                "profit_krw": current_profit
+            },
+            "simulated": {
+                "sales_krw": new_sales_krw,
+                "profit_krw": new_profit
+            },
+            "impact": {
+                "sales_change_krw": sales_diff,
+                "profit_change_krw": sales_diff,
+                "fx_gain_loss": sales_diff
+            }
+        }
+
+        return JSONResponse({
+            "success": True,
+            "data": result
         })
 
     except Exception as e:

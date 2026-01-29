@@ -136,7 +136,7 @@ class ExcelDataLoader:
         """데이터 품질 검증 및 경고"""
 
         # 매출 데이터 확인
-        매출_items = [item for item in items if item.분류 == '매출']
+        매출_items = [item for item in items if item.분류 in ('매출', '매출액')]
         if not 매출_items:
             self.warnings.append("매출 데이터가 없습니다.")
 

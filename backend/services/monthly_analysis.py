@@ -15,9 +15,9 @@ class MonthlyAnalysisService:
     def calculate_period_summary(self, items: List[AccountItem], period: str) -> PeriodSummary:
         """특정 기간의 손익 요약 계산"""
 
-        # 분류별 합계
+        # 분류별 합계 (분류명이 '매출' 또는 '매출액'인 경우 모두 처리)
         매출_합계 = sum(
-            item.금액.get(period, 0) for item in items if item.분류 == '매출'
+            item.금액.get(period, 0) for item in items if item.분류 in ('매출', '매출액')
         )
         매출원가_합계 = sum(
             item.금액.get(period, 0) for item in items if item.분류 == '매출원가'
@@ -196,6 +196,51 @@ class MonthlyAnalysisService:
             breakdown["기타"] = round(100 - classified_sum, 1)
 
         return breakdown
+
+    def analyze_single_period(self, data: ProfitLossData, period: str) -> Dict:
+        """단일 기간 분석 (비교 대상 없이)"""
+        summary = self.calculate_period_summary(data.items, period)
+
+        # 비율 계산
+        매출총이익률 = (summary.매출총이익 / summary.매출액 * 100) if summary.매출액 != 0 else 0
+        영업이익률 = (summary.영업이익 / summary.매출액 * 100) if summary.매출액 != 0 else 0
+        원가율 = (summary.매출원가 / summary.매출액 * 100) if summary.매출액 != 0 else 0
+
+        # 분류별 상세
+        항목별_데이터 = []
+        for item in data.items:
+            금액 = item.금액.get(period, 0)
+            if 금액 != 0:
+                항목별_데이터.append({
+                    '분류': item.분류,
+                    '계정과목': item.계정과목,
+                    '금액': 금액
+                })
+
+        return {
+            'is_single_period': True,
+            '기준월': period,
+            '비교월': None,
+            '기준_요약': {
+                '매출액': summary.매출액,
+                '매출원가': summary.매출원가,
+                '매출총이익': summary.매출총이익,
+                '판매관리비': summary.판매관리비,
+                '영업이익': summary.영업이익,
+                '영업외수익': summary.영업외수익,
+                '영업외비용': summary.영업외비용,
+                '경상이익': summary.경상이익
+            },
+            '비교_요약': None,
+            '변동_요약': {},
+            '주요변동항목': [],
+            '비율': {
+                '매출총이익률': round(매출총이익률, 2),
+                '영업이익률': round(영업이익률, 2),
+                '원가율': round(원가율, 2)
+            },
+            '항목별_데이터': 항목별_데이터
+        }
 
 
 # 싱글톤 인스턴스

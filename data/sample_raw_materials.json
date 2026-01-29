@@ -1,0 +1,47 @@
+{
+  "date": "2025-01-29",
+  "raw_materials": {
+    "cold_rolled_steel": {
+      "name": "냉연강판",
+      "unit": "TON",
+      "current_price": 850000,
+      "previous_month": 787000,
+      "change": 63000,
+      "change_pct": 8.0,
+      "year_ago": 750000,
+      "yoy_change_pct": 13.3,
+      "source": "POSCO 기준가"
+    },
+    "paint": {
+      "name": "도료",
+      "unit": "KG",
+      "current_price": 4500,
+      "previous_month": 4200,
+      "change": 300,
+      "change_pct": 7.1,
+      "year_ago": 4000,
+      "yoy_change_pct": 12.5,
+      "source": "국내 도료업체 평균"
+    },
+    "zinc": {
+      "name": "아연",
+      "unit": "TON",
+      "current_price": 2800000,
+      "previous_month": 2650000,
+      "change": 150000,
+      "change_pct": 5.7,
+      "year_ago": 2500000,
+      "yoy_change_pct": 12.0,
+      "source": "LME 기준"
+    }
+  },
+  "cost_impact": {
+    "total_monthly_increase": 151200000,
+    "breakdown": {
+      "cold_rolled_steel": 126000000,
+      "paint": 15000000,
+      "zinc": 10200000
+    },
+    "impact_on_cost_rate": 2.1
+  }
+}

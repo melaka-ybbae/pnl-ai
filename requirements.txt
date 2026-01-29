@@ -12,7 +12,7 @@ openpyxl==3.1.2
 sqlalchemy==2.0.25
 
 # AI
-anthropic==0.18.1
+anthropic>=0.76.0
 
 # Report generation
 jinja2==3.1.3

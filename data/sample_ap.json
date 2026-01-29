@@ -1,0 +1,94 @@
+{
+  "accounts_payable": [
+    {
+      "vendor": "POSCO",
+      "item": "냉연강판 (Cold Rolled Steel)",
+      "invoice_no": "PO-2025-0110",
+      "invoice_date": "2025-01-10",
+      "due_date": "2025-02-09",
+      "quantity": 2500,
+      "unit": "TON",
+      "unit_price": 850000,
+      "amount_krw": 2125000000,
+      "status": "outstanding",
+      "days_outstanding": 19,
+      "days_overdue": 0,
+      "payment_status": "scheduled"
+    },
+    {
+      "vendor": "Korea Paint Industries",
+      "item": "도료 (Paint)",
+      "invoice_no": "KPI-2025-0112",
+      "invoice_date": "2025-01-12",
+      "due_date": "2025-02-11",
+      "quantity": 65000,
+      "unit": "KG",
+      "unit_price": 4500,
+      "amount_krw": 292500000,
+      "status": "outstanding",
+      "days_outstanding": 17,
+      "days_overdue": 0,
+      "payment_status": "scheduled"
+    },
+    {
+      "vendor": "Korea Zinc",
+      "item": "아연 (Zinc)",
+      "invoice_no": "KZ-2025-0108",
+      "invoice_date": "2025-01-08",
+      "due_date": "2025-02-07",
+      "quantity": 35,
+      "unit": "TON",
+      "unit_price": 2800000,
+      "amount_krw": 98000000,
+      "status": "outstanding",
+      "days_outstanding": 21,
+      "days_overdue": 0,
+      "payment_status": "scheduled"
+    },
+    {
+      "vendor": "POSCO",
+      "item": "냉연강판 (Cold Rolled Steel)",
+      "invoice_no": "PO-2024-1215",
+      "invoice_date": "2024-12-15",
+      "due_date": "2025-01-14",
+      "quantity": 2400,
+      "unit": "TON",
+      "unit_price": 787000,
+      "amount_krw": 1888800000,
+      "status": "overdue",
+      "days_outstanding": 45,
+      "days_overdue": 15,
+      "payment_status": "delayed"
+    },
+    {
+      "vendor": "Korea Electric Power",
+      "item": "전력비 (Electricity)",
+      "invoice_no": "KEPCO-2024-12",
+      "invoice_date": "2024-12-31",
+      "due_date": "2025-01-20",
+      "quantity": 1,
+      "unit": "MONTH",
+      "unit_price": 162000000,
+      "amount_krw": 162000000,
+      "status": "overdue",
+      "days_outstanding": 29,
+      "days_overdue": 9,
+      "payment_status": "processing"
+    }
+  ],
+  "summary": {
+    "total_outstanding": 4566300000,
+    "current": 2515500000,
+    "overdue_1_30": 2050800000,
+    "overdue_31_60": 0,
+    "overdue_61_90": 0,
+    "overdue_90_plus": 0
+  },
+  "aging_analysis": {
+    "current_pct": 55.1,
+    "overdue_1_30_pct": 44.9,
+    "overdue_31_60_pct": 0,
+    "overdue_61_90_pct": 0,
+    "overdue_90_plus_pct": 0
+  }
+}

@@ -1,0 +1,207 @@
+[
+  {
+    "bl_no": "MSKU7654321",
+    "shipper": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea"
+    },
+    "consignee": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA"
+    },
+    "notify_party": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA"
+    },
+    "vessel_name": "EVER GIVEN",
+    "voyage_no": "025E",
+    "port_of_loading": "Busan, Korea",
+    "port_of_discharge": "Los Angeles, USA",
+    "place_of_delivery": "Los Angeles, USA",
+    "ship_date": "2025-01-20",
+    "containers": [
+      {
+        "container_no": "MSCU1234567",
+        "seal_no": "KR123456",
+        "type": "40HC"
+      },
+      {
+        "container_no": "MSCU1234568",
+        "seal_no": "KR123457",
+        "type": "40HC"
+      }
+    ],
+    "cargo_description": "Pre-painted Color Steel Coil (PCM)",
+    "quantity": 500,
+    "unit": "TON",
+    "gross_weight": "510,000 KGS",
+    "measurement": "120 CBM",
+    "freight": "PREPAID",
+    "bl_type": "Original",
+    "issued_at": "Busan, Korea",
+    "issued_date": "2025-01-20",
+    "invoice_ref": "INV-2025-0115"
+  },
+  {
+    "bl_no": "HLCU8765432",
+    "shipper": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea"
+    },
+    "consignee": {
+      "name": "EuroSteel GmbH",
+      "address": "Industriestrasse 45, Hamburg, Germany"
+    },
+    "notify_party": {
+      "name": "EuroSteel GmbH",
+      "address": "Industriestrasse 45, Hamburg, Germany"
+    },
+    "vessel_name": "MSC OSCAR",
+    "voyage_no": "045W",
+    "port_of_loading": "Busan, Korea",
+    "port_of_discharge": "Hamburg, Germany",
+    "place_of_delivery": "Hamburg, Germany",
+    "ship_date": "2024-11-20",
+    "containers": [
+      {
+        "container_no": "HLCU2345678",
+        "seal_no": "KR223456",
+        "type": "40HC"
+      },
+      {
+        "container_no": "HLCU2345679",
+        "seal_no": "KR223457",
+        "type": "40HC"
+      }
+    ],
+    "cargo_description": "Pre-painted Color Steel Coil (PCM)",
+    "quantity": 400,
+    "unit": "TON",
+    "gross_weight": "408,000 KGS",
+    "measurement": "96 CBM",
+    "freight": "PREPAID",
+    "bl_type": "Original",
+    "issued_at": "Busan, Korea",
+    "issued_date": "2024-11-20",
+    "invoice_ref": "INV-2024-1115"
+  },
+  {
+    "bl_no": "OOLU9876543",
+    "shipper": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea"
+    },
+    "consignee": {
+      "name": "Vietnam Construction Co.",
+      "address": "567 Le Loi St, Ho Chi Minh, Vietnam"
+    },
+    "notify_party": {
+      "name": "Vietnam Construction Co.",
+      "address": "567 Le Loi St, Ho Chi Minh, Vietnam"
+    },
+    "vessel_name": "COSCO SHIPPING",
+    "voyage_no": "012S",
+    "port_of_loading": "Busan, Korea",
+    "port_of_discharge": "Ho Chi Minh, Vietnam",
+    "place_of_delivery": "Ho Chi Minh, Vietnam",
+    "ship_date": "2024-10-05",
+    "containers": [
+      {
+        "container_no": "OOLU3456789",
+        "seal_no": "KR323456",
+        "type": "40HC"
+      }
+    ],
+    "cargo_description": "Pre-painted Color Steel Coil (PCM)",
+    "quantity": 250,
+    "unit": "TON",
+    "gross_weight": "255,000 KGS",
+    "measurement": "60 CBM",
+    "freight": "PREPAID",
+    "bl_type": "Original",
+    "issued_at": "Busan, Korea",
+    "issued_date": "2024-10-05",
+    "invoice_ref": "INV-2024-1001"
+  },
+  {
+    "bl_no": "CMAU4567890",
+    "shipper": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea"
+    },
+    "consignee": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA"
+    },
+    "notify_party": {
+      "name": "ABC Building Materials Inc.",
+      "address": "456 Commerce St, Los Angeles, CA, USA"
+    },
+    "vessel_name": "CMA CGM BENJAMIN FRANKLIN",
+    "voyage_no": "038E",
+    "port_of_loading": "Busan, Korea",
+    "port_of_discharge": "Los Angeles, USA",
+    "place_of_delivery": "Los Angeles, USA",
+    "ship_date": "2024-12-05",
+    "containers": [
+      {
+        "container_no": "CMAU5678901",
+        "seal_no": "KR423456",
+        "type": "40HC"
+      },
+      {
+        "container_no": "CMAU5678902",
+        "seal_no": "KR423457",
+        "type": "40HC"
+      }
+    ],
+    "cargo_description": "Pre-painted Color Steel Coil (PCM)",
+    "quantity": 500,
+    "unit": "TON",
+    "gross_weight": "510,000 KGS",
+    "measurement": "120 CBM",
+    "freight": "PREPAID",
+    "bl_type": "Original",
+    "issued_at": "Busan, Korea",
+    "issued_date": "2024-12-05",
+    "invoice_ref": "INV-2024-1201"
+  },
+  {
+    "bl_no": "KKFU5678901",
+    "shipper": {
+      "name": "DK Dongshin Co., Ltd.",
+      "address": "123 Industrial Complex, Busan, Korea"
+    },
+    "consignee": {
+      "name": "Tokyo Building Supply",
+      "address": "12-3 Shibuya, Tokyo, Japan"
+    },
+    "notify_party": {
+      "name": "Tokyo Building Supply",
+      "address": "12-3 Shibuya, Tokyo, Japan"
+    },
+    "vessel_name": "KMTC BUSAN",
+    "voyage_no": "008N",
+    "port_of_loading": "Busan, Korea",
+    "port_of_discharge": "Tokyo, Japan",
+    "place_of_delivery": "Tokyo, Japan",
+    "ship_date": "2025-01-25",
+    "containers": [
+      {
+        "container_no": "KKFU6789012",
+        "seal_no": "KR523456",
+        "type": "40HC"
+      }
+    ],
+    "cargo_description": "Pre-painted Color Steel Coil (PCM)",
+    "quantity": 300,
+    "unit": "TON",
+    "gross_weight": "306,000 KGS",
+    "measurement": "72 CBM",
+    "freight": "PREPAID",
+    "bl_type": "Original",
+    "issued_at": "Busan, Korea",
+    "issued_date": "2025-01-25",
+    "invoice_ref": "INV-2025-0120"
+  }
+]

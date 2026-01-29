@@ -1,5 +1,5 @@
-"""SQLite database models for budget data"""
-from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey, create_engine
+"""SQLite database models for budget data and trade documents"""
+from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey, Boolean, Text, JSON, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from datetime import datetime
@@ -86,3 +86,133 @@ def init_db():
     engine = get_engine()
     Base.metadata.create_all(engine)
     return engine
+
+
+# ============ 무역 관련 데이터베이스 모델 ============
+
+class InvoiceModel(Base):
+    """Commercial Invoice 테이블"""
+    __tablename__ = 'invoices'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    invoice_no = Column(String(50), unique=True, nullable=False, index=True)
+    date = Column(Date, nullable=False)
+    customer = Column(String(200), nullable=False, index=True)
+    country = Column(String(100), nullable=False)
+    currency = Column(String(3), default="USD")  # USD, KRW, EUR 등
+    total = Column(Float, nullable=False)
+    payment_terms = Column(String(100))  # T/T, L/C 등
+    status = Column(String(20), default="pending")  # pending, partial, paid, overdue
+    incoterms = Column(String(20))  # FOB, CIF, CFR 등
+    remarks = Column(Text)
+    created_at = Column(Date, default=datetime.now)
+
+    # Relationships
+    items = relationship("InvoiceItemModel", back_populates="invoice", cascade="all, delete-orphan")
+    bl = relationship("BLModel", back_populates="invoice", uselist=False)
+    ar = relationship("ARModel", back_populates="invoice", uselist=False)
+
+
+class InvoiceItemModel(Base):
+    """Invoice 품목 테이블"""
+    __tablename__ = 'invoice_items'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    invoice_id = Column(Integer, ForeignKey('invoices.id'), nullable=False)
+    product = Column(String(200), nullable=False)
+    quantity = Column(Float, nullable=False)
+    unit = Column(String(20), nullable=False)  # MT, KG, PCS 등
+    unit_price = Column(Float, nullable=False)
+    amount = Column(Float, nullable=False)
+    hs_code = Column(String(20))  # HS Code
+
+    invoice = relationship("InvoiceModel", back_populates="items")
+
+
+class BLModel(Base):
+    """Bill of Lading (선하증권) 테이블"""
+    __tablename__ = 'bills_of_lading'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    bl_no = Column(String(50), unique=True, nullable=False, index=True)
+    invoice_id = Column(Integer, ForeignKey('invoices.id'), nullable=False, index=True)
+    shipper = Column(String(200), nullable=False)
+    consignee = Column(String(200), nullable=False)
+    vessel = Column(String(200), nullable=False)
+    port_of_loading = Column(String(100), nullable=False)
+    port_of_discharge = Column(String(100), nullable=False)
+    ship_date = Column(Date, nullable=False)
+    quantity = Column(Float, nullable=False)
+    unit = Column(String(20), nullable=False)
+    weight = Column(Float)  # KG
+    container_no = Column(String(50))
+    created_at = Column(Date, default=datetime.now)
+
+    invoice = relationship("InvoiceModel", back_populates="bl")
+
+
+class ARModel(Base):
+    """매출채권 (Account Receivable) 테이블"""
+    __tablename__ = 'accounts_receivable'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    invoice_id = Column(Integer, ForeignKey('invoices.id'), nullable=False, unique=True, index=True)
+    customer = Column(String(200), nullable=False, index=True)
+    invoice_date = Column(Date, nullable=False)
+    due_date = Column(Date, nullable=False, index=True)
+    amount_usd = Column(Float, nullable=False)
+    amount_krw = Column(Float)
+    exchange_rate = Column(Float)
+    paid = Column(Boolean, default=False)
+    paid_date = Column(Date)
+    days_overdue = Column(Integer, default=0)
+    status = Column(String(20), default="pending")  # pending, partial, paid, overdue
+    created_at = Column(Date, default=datetime.now)
+
+    invoice = relationship("InvoiceModel", back_populates="ar")
+
+
+class APModel(Base):
+    """매입채무 (Account Payable) 테이블"""
+    __tablename__ = 'accounts_payable'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    invoice_no = Column(String(50), nullable=False, index=True)
+    supplier = Column(String(200), nullable=False, index=True)
+    invoice_date = Column(Date, nullable=False)
+    due_date = Column(Date, nullable=False, index=True)
+    amount_usd = Column(Float, nullable=False)
+    amount_krw = Column(Float)
+    exchange_rate = Column(Float)
+    paid = Column(Boolean, default=False)
+    paid_date = Column(Date)
+    days_overdue = Column(Integer, default=0)
+    status = Column(String(20), default="pending")  # pending, partial, paid, overdue
+    created_at = Column(Date, default=datetime.now)
+
+
+class ExchangeRateModel(Base):
+    """환율 정보 테이블"""
+    __tablename__ = 'exchange_rates'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    currency = Column(String(3), nullable=False, index=True)  # USD, EUR, JPY 등
+    rate = Column(Float, nullable=False)  # 대 KRW 환율
+    date = Column(Date, nullable=False, index=True)
+    source = Column(String(100), default="한국은행")
+    created_at = Column(Date, default=datetime.now)
+
+
+class TradeDocumentModel(Base):
+    """무역 서류 관리 테이블"""
+    __tablename__ = 'trade_documents'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    doc_type = Column(String(20), nullable=False, index=True)  # invoice, bl, packing_list, lc
+    file_path = Column(String(500), nullable=False)
+    upload_date = Column(Date, nullable=False, default=datetime.now)
+    parsed_data = Column(JSON)  # 파싱된 데이터 (JSON 형태)
+    status = Column(String(20), default="uploaded")  # uploaded, parsed, confirmed, error
+    reference_no = Column(String(50), index=True)  # 송장번호, B/L번호 등
+    notes = Column(Text)
+    created_at = Column(Date, default=datetime.now)

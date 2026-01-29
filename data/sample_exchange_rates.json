@@ -1,0 +1,47 @@
+{
+  "date": "2025-01-29",
+  "rates": {
+    "USD_KRW": {
+      "current": 1320.50,
+      "previous_day": 1315.20,
+      "change": 5.30,
+      "change_pct": 0.40,
+      "month_ago": 1295.00,
+      "year_ago": 1280.00
+    },
+    "EUR_KRW": {
+      "current": 1425.30,
+      "previous_day": 1420.80,
+      "change": 4.50,
+      "change_pct": 0.32,
+      "month_ago": 1410.00,
+      "year_ago": 1390.00
+    },
+    "JPY_KRW": {
+      "current": 8.85,
+      "previous_day": 8.82,
+      "change": 0.03,
+      "change_pct": 0.34,
+      "month_ago": 8.70,
+      "year_ago": 8.50
+    },
+    "CNY_KRW": {
+      "current": 182.45,
+      "previous_day": 181.90,
+      "change": 0.55,
+      "change_pct": 0.30,
+      "month_ago": 180.20,
+      "year_ago": 175.50
+    }
+  },
+  "forex_exposure": {
+    "usd_receivables": 1297200,
+    "usd_receivables_krw": 1713168600,
+    "eur_receivables": 280000,
+    "eur_receivables_krw": 399084000,
+    "jpy_receivables": 0,
+    "jpy_receivables_krw": 0,
+    "total_exposure_krw": 2112252600,
+    "unrealized_forex_gain_loss": 20084000
+  }
+}

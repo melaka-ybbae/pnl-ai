@@ -1,0 +1,106 @@
+[
+  {
+    "customer_code": "C001",
+    "customer_name": "ABC Building Materials Inc.",
+    "country": "USA",
+    "region": "North America",
+    "contact_person": "John Smith",
+    "email": "john.smith@abcbuilding.com",
+    "phone": "+1-310-555-1234",
+    "address": "456 Commerce St, Los Angeles, CA 90001, USA",
+    "payment_terms": "T/T 60 days after B/L date",
+    "credit_limit_usd": 1000000,
+    "credit_limit_krw": 1320000000,
+    "main_products": [
+      "Pre-painted Color Steel Coil (PCM) - Building Materials",
+      "RAL 9002, RAL 3000, RAL 5015"
+    ],
+    "annual_volume_ton": 6000,
+    "relationship_start": "2018-03-15",
+    "customer_grade": "A",
+    "notes": "주요 거래처, 건자재용 PCM 주력"
+  },
+  {
+    "customer_code": "C002",
+    "customer_name": "EuroSteel GmbH",
+    "country": "Germany",
+    "region": "Europe",
+    "contact_person": "Hans Mueller",
+    "email": "h.mueller@eurosteel.de",
+    "phone": "+49-40-5555-6789",
+    "address": "Industriestrasse 45, 20095 Hamburg, Germany",
+    "payment_terms": "T/T 60 days after B/L date",
+    "credit_limit_eur": 700000,
+    "credit_limit_krw": 997710000,
+    "main_products": [
+      "Pre-painted Color Steel Coil (PCM) - Building Materials",
+      "RAL 7016, RAL 9006"
+    ],
+    "annual_volume_ton": 4800,
+    "relationship_start": "2019-06-20",
+    "customer_grade": "A",
+    "notes": "유럽 주요 거래처, 고품질 요구"
+  },
+  {
+    "customer_code": "C003",
+    "customer_name": "Vietnam Construction Co.",
+    "country": "Vietnam",
+    "region": "Southeast Asia",
+    "contact_person": "Nguyen Van Tuan",
+    "email": "tuan.nguyen@vnconst.vn",
+    "phone": "+84-28-3812-5678",
+    "address": "567 Le Loi St, District 1, Ho Chi Minh City, Vietnam",
+    "payment_terms": "T/T 60 days after B/L date",
+    "credit_limit_usd": 400000,
+    "credit_limit_krw": 528000000,
+    "main_products": [
+      "Pre-painted Color Steel Coil (PCM) - Building Materials",
+      "RAL 9002, RAL 5015"
+    ],
+    "annual_volume_ton": 3000,
+    "relationship_start": "2020-09-10",
+    "customer_grade": "B",
+    "notes": "동남아 신흥시장, 가격 민감"
+  },
+  {
+    "customer_code": "C004",
+    "customer_name": "Tokyo Building Supply",
+    "country": "Japan",
+    "region": "East Asia",
+    "contact_person": "Tanaka Hiroshi",
+    "email": "h.tanaka@tbs-tokyo.jp",
+    "phone": "+81-3-5555-9012",
+    "address": "12-3 Shibuya, Shibuya-ku, Tokyo 150-0002, Japan",
+    "payment_terms": "T/T 60 days after B/L date",
+    "credit_limit_usd": 600000,
+    "credit_limit_krw": 792000000,
+    "main_products": [
+      "Pre-painted Color Steel Coil (PCM) - Building & Appliance",
+      "RAL 5012, RAL 8017"
+    ],
+    "annual_volume_ton": 3600,
+    "relationship_start": "2021-02-25",
+    "customer_grade": "A",
+    "notes": "일본 시장 진출, 품질 우선"
+  },
+  {
+    "customer_code": "C005",
+    "customer_name": "Samsung Electronics",
+    "country": "Korea",
+    "region": "Domestic",
+    "contact_person": "김철수",
+    "email": "cs.kim@samsung.com",
+    "phone": "+82-2-1234-5678",
+    "address": "서울시 서초구 서초대로 74길 11",
+    "payment_terms": "월말 마감 익월 말 지급",
+    "credit_limit_krw": 500000000,
+    "main_products": [
+      "Pre-painted Color Steel Coil (PCM) - Appliance",
+      "가전제품용 맞춤 색상"
+    ],
+    "annual_volume_ton": 2400,
+    "relationship_start": "2017-05-10",
+    "customer_grade": "A",
+    "notes": "국내 주요 가전용 PCM 납품처"
+  }
+]

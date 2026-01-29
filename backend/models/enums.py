@@ -35,3 +35,38 @@ class ExportFormat(str, Enum):
     """내보내기 형식"""
     PDF = "pdf"
     EXCEL = "excel"
+
+
+# ============ 무역 관련 Enum ============
+
+class DocumentType(str, Enum):
+    """무역 서류 유형"""
+    INVOICE = "invoice"              # Commercial Invoice
+    BL = "bl"                        # Bill of Lading
+    PACKING_LIST = "packing_list"    # Packing List
+    LC = "lc"                        # Letter of Credit
+
+
+class DocumentStatus(str, Enum):
+    """서류 처리 상태"""
+    UPLOADED = "uploaded"      # 업로드됨
+    PARSED = "parsed"          # 파싱 완료
+    CONFIRMED = "confirmed"    # 확인/승인됨
+    ERROR = "error"            # 오류 발생
+
+
+class PaymentStatus(str, Enum):
+    """결제 상태"""
+    PENDING = "pending"      # 대기 중
+    PARTIAL = "partial"      # 부분 결제
+    PAID = "paid"            # 완납
+    OVERDUE = "overdue"      # 연체
+
+
+class CurrencyType(str, Enum):
+    """통화 유형"""
+    USD = "USD"
+    KRW = "KRW"
+    EUR = "EUR"
+    JPY = "JPY"
+    CNY = "CNY"

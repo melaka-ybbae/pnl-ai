@@ -1,0 +1,91 @@
+[
+  {
+    "invoice_ref": "INV-2025-0115",
+    "date": "2025-01-18",
+    "shipper": "DK Dongshin Co., Ltd.",
+    "consignee": "ABC Building Materials Inc.",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "PCM - RAL 9002",
+        "coil_count": 15,
+        "quantity": 300,
+        "unit": "TON",
+        "net_weight": "300,000 KGS",
+        "gross_weight": "306,000 KGS",
+        "container": "MSCU1234567"
+      },
+      {
+        "item_no": 2,
+        "product": "PCM - RAL 5015",
+        "coil_count": 10,
+        "quantity": 200,
+        "unit": "TON",
+        "net_weight": "200,000 KGS",
+        "gross_weight": "204,000 KGS",
+        "container": "MSCU1234568"
+      }
+    ],
+    "total_coils": 25,
+    "total_quantity": "500 TON",
+    "total_net_weight": "500,000 KGS",
+    "total_gross_weight": "510,000 KGS",
+    "total_measurement": "120 CBM"
+  },
+  {
+    "invoice_ref": "INV-2024-1115",
+    "date": "2024-11-18",
+    "shipper": "DK Dongshin Co., Ltd.",
+    "consignee": "EuroSteel GmbH",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "PCM - RAL 7016",
+        "coil_count": 20,
+        "quantity": 400,
+        "unit": "TON",
+        "net_weight": "400,000 KGS",
+        "gross_weight": "408,000 KGS",
+        "container": "HLCU2345678, HLCU2345679"
+      }
+    ],
+    "total_coils": 20,
+    "total_quantity": "400 TON",
+    "total_net_weight": "400,000 KGS",
+    "total_gross_weight": "408,000 KGS",
+    "total_measurement": "96 CBM"
+  },
+  {
+    "invoice_ref": "INV-2024-1201",
+    "date": "2024-12-03",
+    "shipper": "DK Dongshin Co., Ltd.",
+    "consignee": "ABC Building Materials Inc.",
+    "items": [
+      {
+        "item_no": 1,
+        "product": "PCM - RAL 3000",
+        "coil_count": 18,
+        "quantity": 350,
+        "unit": "TON",
+        "net_weight": "350,000 KGS",
+        "gross_weight": "357,000 KGS",
+        "container": "CMAU5678901"
+      },
+      {
+        "item_no": 2,
+        "product": "PCM - RAL 6005",
+        "coil_count": 8,
+        "quantity": 150,
+        "unit": "TON",
+        "net_weight": "150,000 KGS",
+        "gross_weight": "153,000 KGS",
+        "container": "CMAU5678902"
+      }
+    ],
+    "total_coils": 26,
+    "total_quantity": "500 TON",
+    "total_net_weight": "500,000 KGS",
+    "total_gross_weight": "510,000 KGS",
+    "total_measurement": "120 CBM"
+  }
+]
