@@ -1,0 +1,22 @@
+import { ReactNode } from 'react';
+
+interface CardProps {
+  title?: string;
+  children: ReactNode;
+  className?: string;
+  action?: ReactNode;
+}
+
+export default function Card({ title, children, className = '', action }: CardProps) {
+  return (
+    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 ${className}`}>
+      {title && (
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+          <h3 className="font-semibold text-gray-800">{title}</h3>
+          {action}
+        </div>
+      )}
+      <div className="p-4">{children}</div>
+    </div>
+  );
+}
